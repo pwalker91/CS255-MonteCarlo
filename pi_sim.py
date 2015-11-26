@@ -24,7 +24,7 @@ def _in_circle(x, y, r=1):
 #END DEF
 
 
-def simulate_pi(numpoints=100):
+def approx_pi(numpoints=100):
     """
     Using the given number of points, generates an approximation of PI.
 
@@ -34,7 +34,7 @@ def simulate_pi(numpoints=100):
     """
     _numin = 0.0
     _total = 0.0
-    for x in range(numpoints):
+    for _ in range(numpoints):
         _x, _y = _make_point()
         if _in_circle(_x, _y):
             _numin+=1
@@ -47,3 +47,19 @@ def simulate_pi(numpoints=100):
 
     return (_pi, _error)
 #END DEF
+
+
+# ---- The MAIN of this script ------------------------------------------------
+def main():
+    """Script Main"""
+    print(">> Running 100 tests of approximating pi...")
+
+    for _ in range(100):
+        
+    #END FOR
+#END DEF
+
+
+main()
+
+#END OF LINE
