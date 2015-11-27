@@ -54,25 +54,19 @@ def main():
     """Script Main"""
 
     _NUMTESTS = 1000
-    _MAXPOINTS = 10000
-    _TESTS = []
+    _MAXPOINTS = 5000
+    _TESTS = [1,2,3,4,5,10,20,30,40,50,100,150,200,250,300,350,400,450,500,
+              600,700,800,900,1000,1100,1200,1300,1400,1500,1750,2000,
+              2250,2500,2750,3000,3500,4000,5000,6000,8000,10000]
 
-    for points in range(1, _MAXPOINTS):
-        print(" ", str(points).ljust(5), end="\r")
+    for points in _TESTS:
         errors = []
         for _ in range(_NUMTESTS):
             pi, error = approx_pi(points)
             errors.append(error)
         #END FOR
-        _TESTS.append({
-            "points": points,
-            "avgError": (sum(errors) / float(len(errors)))
-        })
-    #END FOR
-
-    for TEST in _TESTS:
-        print("{0}, {1}%"
-              .format(str(TEST["points"]).ljust(5), str(TEST["avgError"])[:7]))
+        print("{0}, {1}%".format(str(points).ljust(5),
+                                 str(sum(errors) / float(len(errors)))[:7]))
     #END FOR
 #END DEF
 
