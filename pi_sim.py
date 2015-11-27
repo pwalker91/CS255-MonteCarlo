@@ -9,6 +9,7 @@ ABSTRACT:
 
 import math
 import random
+import datetime as dt
 
 
 def _make_point(maxX=1, maxY=1):
@@ -54,19 +55,21 @@ def main():
     """Script Main"""
 
     _NUMTESTS = 1000
-    _MAXPOINTS = 5000
     _TESTS = [1,2,3,4,5,10,20,30,40,50,100,150,200,250,300,350,400,450,500,
               600,700,800,900,1000,1100,1200,1300,1400,1500,1750,2000,
               2250,2500,2750,3000,3500,4000,5000,6000,8000,10000]
 
     for points in _TESTS:
         errors = []
+        start = dt.datetime.now()
         for _ in range(_NUMTESTS):
             pi, error = approx_pi(points)
             errors.append(error)
         #END FOR
-        print("{0}, {1}%".format(str(points).ljust(5),
-                                 str(sum(errors) / float(len(errors)))[:7]))
+        diff = dt.datetime.now() - start
+        print("{0}, {1}%, {2}".format(str(points).ljust(5),
+                                      str(sum(errors) / float(len(errors)))[:7],
+                                      diff))
     #END FOR
 #END DEF
 
