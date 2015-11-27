@@ -20,7 +20,7 @@ def _make_point(maxX=1, maxY=1):
 
 def _in_circle(x, y, r=1):
     """Tests if the given X and Y are in the radius R"""
-    return not math.sqrt(x**2, y**2)>r
+    return not math.sqrt((x**2)+(y**2))>r
 #END DEF
 
 
@@ -43,7 +43,7 @@ def approx_pi(numpoints=100):
 
     #We multiply by 4, because our "squares" area is 4
     _pi = 4 * (_numin/_total)
-    _error = math.fabs((_pi-math.pi)/math.pi)*100)
+    _error = math.fabs((_pi-math.pi)/math.pi)*100
 
     return (_pi, _error)
 #END DEF
@@ -52,10 +52,27 @@ def approx_pi(numpoints=100):
 # ---- The MAIN of this script ------------------------------------------------
 def main():
     """Script Main"""
-    print(">> Running 100 tests of approximating pi...")
 
-    for _ in range(100):
-        
+    _NUMTESTS = 1000
+    _MAXPOINTS = 10000
+    _TESTS = []
+
+    for points in range(1, _MAXPOINTS):
+        print(" ", str(points).ljust(5), end="\r")
+        errors = []
+        for _ in range(_NUMTESTS):
+            pi, error = approx_pi(points)
+            errors.append(error)
+        #END FOR
+        _TESTS.append({
+            "points": points,
+            "avgError": (sum(errors) / float(len(errors)))
+        })
+    #END FOR
+
+    for TEST in _TESTS:
+        print("{0}, {1}%"
+              .format(str(TEST["points"]).ljust(5), str(TEST["avgError"])[:7]))
     #END FOR
 #END DEF
 
